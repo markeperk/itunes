@@ -15,16 +15,21 @@
           </div>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="artist" placeholder="Artist Name" >
-              <button class="btn btn-primary" ng-click="getSongData()"> Submit </button>
+              <input type="text" class="form-control" ng-model="artist" placeholder="Artist Name" ng-change="getSongData()">
+       <!--        <button class="btn btn-primary" ng-click="getSongData()"> Submit </button> -->
             </div>
+              <select class="input-large" ng-model="selectAttr" ng-options="item.raw as item.pretty for item in options">
+                 <option>Song</option>
+                 <option>Album</option>
+                 <option>Movie</option>
+              </select>
           </form>
         </div>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading"> Your Search Results:</div>
-     <div class="gridStyle" ng-grid="gridOptions" swap-image="defaultInfo.search"></div>
+     <div class="gridStyle" ng-grid="gridOptions | orderBy: selectAttr: sort" swap-image="defaultInfo.search"></div>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
